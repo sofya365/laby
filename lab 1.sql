@@ -1,3 +1,3 @@
 use world;
 select name from world.city;
-select name from world.city where name like "C%";
+select name from world.city where name like "a%";
