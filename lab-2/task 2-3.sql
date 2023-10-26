@@ -1,2 +1,2 @@
 /*Выбрать объекты, пользование которых бесплатно для членов клуба.*/
-select facility FROM facilities where membercost=0
+SELECT facility FROM facilities WHERE membercost=0;

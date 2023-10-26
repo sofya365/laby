@@ -1,4 +1,4 @@
 /* Выберите самый дорогой и самый дешевый объект.*/
-SELECT max(monthlymaintenance), 'дорогой' FROM facilities;
-SELECT facility,'дешевый' FROM facilities WHERE monthlymaintenance = (SELECT max(monthlymaintenance) FROM facilities)
-OR monthlymaintenance = (SELECT min(monthlymaintenance) FROM facilities);
+SELECT max(initialoutlay), 'дорогой' FROM facilities;
+SELECT facility,'дешевый' FROM facilities WHERE initialoutlay = (SELECT max(initialoutlay) FROM facilities)
+OR initialoutlay = (SELECT min(initialoutlay) FROM facilities);

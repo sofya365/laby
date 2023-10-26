@@ -1,3 +1,3 @@
 /* Выберите 10 фамилий членов клуба упорядочите их по алфавиту 
 без повторов.*/ 
-select surname from members where memid > 1 and memid < 12 order by surname;
+SELECT surname FROM members WHERE memid > 1 AND memid < 12 ORDER BY surname;

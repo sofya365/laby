@@ -1,3 +1,3 @@
 /* Выбрать всех членов клуба, зарегистрированных с сентября 2012 
 года.*/
-select * from bookings where starttime like '%2012-09%';
+SELECT firstname FROM members WHERE joindate LIKE '%2012-09%';
