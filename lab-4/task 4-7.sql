@@ -3,6 +3,6 @@
 изменений. Повторите запрос списка аренд. Сравните результат.*/
 START TRANSACTION;
 DELETE FROM bookings;
-SELECT 'Before' AS result_type, * FROM bookings;
+SELECT * FROM bookings;
 ROLLBACK;
-SELECT 'After' AS result_type, * FROM bookings;
+SELECT * FROM bookings;
