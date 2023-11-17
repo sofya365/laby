@@ -2,5 +2,5 @@
 задании 1, сгенерировав новое ID.*/
 USE cd;
 INSERT INTO facilities(facid, facility, membercost, guestcost, initialoutlay, monthlymaintenance)
-VALUES(12, "spa", 20, 30, 100000, 800);
+VALUES((SELECT MAX(facid) + 1 FROM facilities), 'Spa', 20, 30, 100000, 800);
 SELECT * FROM facilities;
