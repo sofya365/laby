@@ -3,5 +3,5 @@
 USE cd;
 SELECT COUNT(b.slots), f.facility, MONTH(b.starttime) FROM bookings AS b
 JOIN facilities AS f ON b.facid = f.facid
-WHERE YEAR(starttime) LIKE '%2012-09%'
+WHERE YEAR(starttime) = '2012'
 GROUP BY f.facid, MONTH(b.starttime);
