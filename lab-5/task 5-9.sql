@@ -8,6 +8,6 @@ WHEN b.memid = 0 THEN f.guestcost * b.slots ELSE f.membercost * b.slots
 END) AS 'общий доход'
 FROM facilities AS f
 JOIN bookings AS b ON f.facid = b.facid
-WHERE 'общий доход' < 1000
 GROUP BY f.facility
+HAVING 'общий доход' < 1000
 ORDER BY 'общий доход' DESC;
