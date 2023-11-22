@@ -4,7 +4,7 @@
 Сортировка по званию (== рангу), фамилии и имени.*/
 USE cd;
 SELECT CONCAT(m.firstname,' ', m.surname) AS 'фио', ROUND(b.slots, -1) AS 'забронированные часы', 
-RANK() OVER (ORDER BY ROUND(SUM(b.slots, -1))) as 'ранг'
+RANK() OVER (ORDER BY ROUND(SUM(b.slots, -1))) AS 'ранг'
 FROM members AS m JOIN bookings AS b ON m.facid=b.facid
 WHERE ROUND(b.slots, -1) NOT NULL
-ORDER BY 'ранг', 'фио';
+ORDER BY ранг, m.firstname, m.surname;
