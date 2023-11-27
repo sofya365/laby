@@ -2,6 +2,6 @@
 задании 1, сгенерировав новое ID.*/
 USE cd;
 INSERT INTO facilities(facid, facility, membercost, guestcost, initialoutlay, monthlymaintenance)
-SELECT (SELECT MAX(facid) FROM bookings), facility, membercost, guestcost, initialoutlay, monthlymaintenance FROM facilities
-WHERE facility LIKE 'spa';
+SELECT (SELECT MAX(facid)+1 FROM facilities), facility, membercost, guestcost, initialoutlay, monthlymaintenance FROM facilities
+WHERE facility LIKE 'spa' LIMIT 1;
 SELECT * FROM facilities;
