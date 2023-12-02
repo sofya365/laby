@@ -3,7 +3,7 @@
 USE cd;
 SELECT DISTINCT facid 
 FROM (
-  SELECT facid, slots, RANK() OVER (ORDER BY slots DESC) AS rnk
-  FROM bookings
+ SELECT facid, slots, RANK() OVER (ORDER BY slots DESC) AS rnk
+ FROM bookings
 ) AS subquery
 WHERE rnk = 1;
