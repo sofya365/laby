@@ -58,8 +58,8 @@ ALTER TABLE treatments
 ALTER TABLE orders
 	ADD CONSTRAINT treatments_pk PRIMARY KEY (orderid);
     
-ALTER TABLE producer
-    ADD CONSTRAINT fk_treatments_prodid FOREIGN KEY (prodid) REFERENCES treatments(prodid);
-    
 ALTER TABLE treatments
-    ADD CONSTRAINT fk_orders_treatid FOREIGN KEY (treatid) REFERENCES orders(treatid);  
+    ADD CONSTRAINT fk_treatments_prodid FOREIGN KEY (prodid) REFERENCES producer(prodid);
+    
+ALTER TABLE orders
+    ADD CONSTRAINT fk_orders_treatid FOREIGN KEY (treatid) REFERENCES treatments(treatid);   
