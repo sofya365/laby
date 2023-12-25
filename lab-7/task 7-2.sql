@@ -1,7 +1,7 @@
 /*Создайте таблицу payments со структурой (payid INT PK, FK on booking.bookid; payment  DECIMAL. 
 Добавьте в таблицу bookings поле payed, смысл которого оплачена или не оплачена аренда. 
 Создайте триггеры*/
--- создание таблицы payments и добавление payed
+/* создание таблицы payments и добавление payed*/
 USE cd1;
 CREATE TABLE payments (
   payid INT PRIMARY KEY AUTO_INCREMENT,
@@ -10,7 +10,7 @@ CREATE TABLE payments (
   FOREIGN KEY (bookid) REFERENCES cd.bookings(bookid)
 );
 ALTER TABLE bookings ADD COLUMN payed TINYINT DEFAULT 0;
--- запрещаем удаление оплащенных
+/*Создайте триггеры, которые: 1) Запрещают удаление записей, если они уже оплачены;*/
 DELIMITER $$
 DROP TRIGGER IF EXISTS prevent_payment_deletion $$
 CREATE TRIGGER prevent_payment_deletion 
@@ -22,8 +22,10 @@ BEGIN
   END IF;
 END$$
 DELIMITER ;
+/*2) После отметки оплаты, заносят в таблицу payments запись с соответствующим значением PK 
+и суммой оплаты, для вычисления которой используется функция созданная в Task-7-1.*/
+/*3) При отмене оплаты - удаляет соответствующую запись в таблице payments.*/
 DELIMITER $$
--- удаление и замена
 DROP TRIGGER IF EXISTS payment_record $$
 CREATE TRIGGER payment_record 
 AFTER UPDATE ON bookings
@@ -38,7 +40,7 @@ BEGIN
             DELETE FROM payments p WHERE p.bookid = NEW.bookid;
     END CASE;
 END $$
--- заполняем payments
+/* заполняем payments*/
 DROP TRIGGER IF EXISTS payed_in_book $$
 CREATE TRIGGER payed_in_book 
 AFTER INSERT ON bookings 
@@ -50,14 +52,14 @@ BEGIN
     END IF;
 END $$
 DELIMITER ;
--- отмечаем, что все аренды июля 2012 оплачены
+/* отмечаем, что все аренды июля 2012 оплачены*/
 UPDATE bookings 
 SET payed = 1
 WHERE YEAR(starttime) = 2012 AND MONTH(starttime) = 7;
--- оплата на июль 2012 с данными из payments
+/* оплата на июль 2012 с данными из payments*/
 SELECT SUM(payment) as costJuly1
 FROM payments;
--- оплата на июль 2012 с данными из bookings
+/* оплата на июль 2012 с данными из bookings*/
 SELECT SUM(CalculateRentalCost(memid, facid, slots)) as costJuly2
 FROM bookings 
 WHERE YEAR(starttime) = 2012 AND MONTH(starttime) = 7;
