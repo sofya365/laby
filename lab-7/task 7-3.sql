@@ -1,11 +1,11 @@
 /*Напишите процедуру, которая считает окупаемость каждого объекта клуба на основании оплаты аренд за месяц. 
 Применить ее к июлю 2012 года. */
-USE cd;
+USE cd1;
 DELIMITER $$
 DROP PROCEDURE IF EXISTS payback $$
 CREATE PROCEDURE payback(yourdate DATE)
   BEGIN
-    SELECT b.facid, f.facility, SUM(p.payment) - f.monthlymaintenance AS revenue
+    SELECT IF (SUM(p.payment) - f.monthlymaintenance = 0, 123456789, f.initialoutlay / (SUM(p.payment) - f.monthlymaintenance)) AS occupate
 	FROM bookings b
 	INNER JOIN payments p ON b.bookid = p.bookid
 	INNER JOIN facilities f ON b.facid = f.facid
