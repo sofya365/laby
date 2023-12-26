@@ -1,5 +1,5 @@
 /*Создайте функцию, которая рассчитывает стоимость каждой аренды (для каждой записи таблицы bookings)*/
-USE cd1;
+USE cd;
 DELIMITER $$
 DROP FUNCTION IF EXISTS CalculateCost $$
 CREATE FUNCTION CalculateCost(memid INT, facid INT, slots INT) RETURNS DECIMAL(10, 2)
